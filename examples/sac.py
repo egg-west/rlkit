@@ -110,9 +110,11 @@ if __name__ == "__main__":
             reward_scale=1,
             use_automatic_entropy_tuning=True,
         ),
-        snapshot_mode='gap_and_last',
-        snapshot_gap=20,
     )
-    setup_logger('name-of-experiment', variant=variant)
+    setup_logger('name-of-experiment',
+                 variant=variant,
+                 snapshot_mode='gap_and_last',
+                 snapshot_gap=20
+    )
     # ptu.set_gpu_mode(True)  # optionally set the GPU (default=False)
     experiment(variant)
