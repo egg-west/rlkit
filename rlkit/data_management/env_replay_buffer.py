@@ -3,6 +3,8 @@ from gym.spaces import Discrete
 from rlkit.data_management.simple_replay_buffer import SimpleReplayBuffer
 from rlkit.envs.env_utils import get_dim
 import numpy as np
+import pickle
+import os
 
 
 class EnvReplayBuffer(SimpleReplayBuffer):
@@ -48,3 +50,17 @@ class EnvReplayBuffer(SimpleReplayBuffer):
             terminal=terminal,
             **kwargs
         )
+
+    def save_buffer(self, path: str, file_name: str):
+        meta_data = {
+            "observations": self._observations,
+            "next_observations": self._next_obs,
+            "actions": self._actions,
+            "rewards": self._rewards,
+            "terminals": self._terminals,
+            "infos": self._env_infos
+        }
+
+        assert os.path.exists(path)
+        with open(os.path.join(path, file_name), "wb") as f:
+            pickle.dump(meta_data, f)
