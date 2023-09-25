@@ -63,4 +63,4 @@ class EnvReplayBuffer(SimpleReplayBuffer):
 
         assert os.path.exists(path)
         with open(os.path.join(path, file_name), "wb") as f:
-            pickle.dump(meta_data, f)
+            pickle.dump([meta_data, self._size], f)

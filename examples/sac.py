@@ -79,8 +79,8 @@ def experiment(variant):
         replay_buffer=replay_buffer,
         **variant['algorithm_kwargs']
     )
-    # test replay buffer saving
-    replay_buffer.save_buffer("./", "test_buffer.pkl")
+    # test replay buffer saving # succeeded
+    # replay_buffer.save_buffer("./", "test_buffer.pkl")
     algorithm.to(ptu.device)
     algorithm.train()
 
