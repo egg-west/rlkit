@@ -1,3 +1,4 @@
+import gym
 from gym.envs.mujoco import HalfCheetahEnv
 from gym.envs.mujoco import HumanoidEnv
 
@@ -16,8 +17,10 @@ from rlkit.torch.torch_rl_algorithm import TorchBatchRLAlgorithm
 def experiment(variant):
     #expl_env = NormalizedBoxEnv(HalfCheetahEnv())
     #eval_env = NormalizedBoxEnv(HalfCheetahEnv())
-    expl_env = NormalizedBoxEnv(HumanoidEnv())
-    eval_env = NormalizedBoxEnv(HumanoidEnv())
+    # expl_env = NormalizedBoxEnv(HumanoidEnv())
+    # eval_env = NormalizedBoxEnv(HumanoidEnv())
+    expl_env = NormalizedBoxEnv(gym.make("Humanoid-v2"))
+    eval_env = NormalizedBoxEnv(gym.make("Humanoid-v2"))
 
     obs_dim = expl_env.observation_space.low.size
     action_dim = eval_env.action_space.low.size
@@ -95,7 +98,7 @@ if __name__ == "__main__":
         layer_size=256,
         replay_buffer_size=int(4E6),
         algorithm_kwargs=dict(
-            num_epochs=10000,
+            num_epochs=5000,
             num_eval_steps_per_epoch=5000,
             num_trains_per_train_loop=1000,
             num_expl_steps_per_train_loop=1000,
