@@ -1,6 +1,8 @@
 from gym.envs.mujoco import HalfCheetahEnv
+from gym.envs.mujoco import HumanoidEnv
 
 import rlkit.torch.pytorch_util as ptu
+ptu.set_gpu_mode(True)
 from rlkit.data_management.env_replay_buffer import EnvReplayBuffer
 from rlkit.envs.wrappers import NormalizedBoxEnv
 from rlkit.launchers.launcher_util import setup_logger
@@ -25,7 +27,7 @@ def experiment(variant):
     )
     qf2 = ConcatMlp(
         input_size=obs_dim + action_dim,
-        output_size=1,
+          output_size=1,
         hidden_sizes=[M, M],
     )
     target_qf1 = ConcatMlp(
@@ -105,6 +107,8 @@ if __name__ == "__main__":
             reward_scale=1,
             use_automatic_entropy_tuning=True,
         ),
+        snapshot_mode='gap_and_last',
+        snapshot_gap=20,
     )
     setup_logger('name-of-experiment', variant=variant)
     # ptu.set_gpu_mode(True)  # optionally set the GPU (default=False)
