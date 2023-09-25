@@ -52,7 +52,7 @@ class BatchRLAlgorithm(BaseRLAlgorithm, metaclass=abc.ABCMeta):
             self.offline_rl = self.epoch < 0
             self._begin_epoch(self.epoch)
             self._train()
-            if self.epoch in [500, 1000, 2000, 3000, 5000, 6000]:
+            if self.epoch in [300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000]:
                 self.replay_buffer.save_buffer("./", f"{self.epoch}_replay.pkl")
             self._end_epoch(self.epoch)
 

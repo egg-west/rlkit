@@ -96,9 +96,9 @@ if __name__ == "__main__":
         algorithm="SAC",
         version="normal",
         layer_size=256,
-        replay_buffer_size=int(4E6),
+        replay_buffer_size=int(2E6),
         algorithm_kwargs=dict(
-            num_epochs=5000,
+            num_epochs=2100,
             num_eval_steps_per_epoch=5000,
             num_trains_per_train_loop=1000,
             num_expl_steps_per_train_loop=1000,
@@ -119,7 +119,7 @@ if __name__ == "__main__":
     setup_logger('sac-humanoid',
                  variant=variant,
                  snapshot_mode='gap_and_last',
-                 snapshot_gap=200
+                 snapshot_gap=50
     )
     # ptu.set_gpu_mode(True)  # optionally set the GPU (default=False)
     experiment(variant)
